@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shopping list example</title>
+
+  <!-- STYLE -->
     <style>
       li {
         margin-bottom: 10px;
@@ -16,6 +18,8 @@
       }
     </style>
   </head>
+
+  <!-- HTML BODY -->
   <body>
 
     <h1>My shopping list</h1>
@@ -23,15 +27,51 @@
     <div>
       <label for="item">Enter a new item:</label>
       <input type="text" name="item" id="item">
-      <button>Add item</button>
+      <button id="add">Add item</button>
     </div>
 
     <ul>
 
     </ul>
 
+  <!-- JAVA SCRIPT  -->
     <script>
+    
+      let ul = document.querySelector("ul");
+      let input = document.querySelector("input");
+      let button = document.querySelector("button");
+
+      button.addEventListener("click", function (){
+        // Save and clear input
+        let new_item = input.value;
+        input.value = "";
+
+        // Elements for shopping list item
+        let li = document.createElement("li");
+        let span = document.createElement("span");
+        let deleteButton = document.createElement("button");
+
+        // Assembling li
+        li.appendChild(span);
+        li.appendChild(deleteButton);
+
+        span.textContent = new_item;
+        deleteButton.textContent = "Delete";
+
+        ul.appendChild(li);
+
+        // Delete Button event listener
+        deleteButton.addEventListener("click", function(){
+          deleteButton.parentElement.remove();
+        });
+
+        // Focus on input
+        document.querySelector("#add").addEventListener("click", () => {
+          document.querySelector("input").focus();
+        })
+      });
 
     </script>
+
   </body>
 </html>
